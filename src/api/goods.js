@@ -6,25 +6,25 @@ import fetch from './fetch/index';
  */
 class GoodsApi {
   
-  getGoodsList = (params) => fetch('POST', '/goods/query/list', params);
+  getGoodsList(){return(params)=> fetch('POST', '/goods/query/list', params);}
   
-  addGoods = (params) => fetch('POST', '/goods/add', params);
+  addGoods (){return(params) => fetch('POST', '/goods/add', params);}
   
-  getGoods = (params) => fetch('POST', '/goods/query/id', params);
+  getGoods (){return(params) => fetch('POST', '/goods/query/id', params);}
   
-  editGoods = (params) => fetch('POST', '/goods/edit', params);
+  editGoods (){return(params) => fetch('POST', '/goods/edit', params);}
   
-  delGoods = (params) => fetch('POST', '/goods/del', params);
+  delGoods (){return(params) =>fetch('POST', '/goods/del', params);}
   
-  getGoodsDetails = (params) => fetch('POST', '/goods/query/details', params);
+  getGoodsDetails (){return(params) =>fetch('POST', '/goods/query/details', params);}
   
-  addGoodsDetails  = (params) => fetch('POST', '/goods/details/add', params); 
+  addGoodsDetails  (){return(params) => fetch('POST', '/goods/details/add', params); }
   
-  editGoodsDetails  = (params) => fetch('POST', '/goods/details/edit', params);
+  editGoodsDetails  (){return(params) =>fetch('POST', '/goods/details/edit', params);}
   
-  delGoodsDetails  = (params) => fetch('POST', '/goods/details/del', params);
+  delGoodsDetails  (){return(params) => fetch('POST', '/goods/details/del', params);}
 
-  downloadImg  = (params) => fetch('POST', '/img/download/imgIds', params);
+  downloadImg (){return (params) =>fetch('POST', '/img/download/imgIds', params);}
 
 }
 

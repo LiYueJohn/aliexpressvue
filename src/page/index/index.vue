@@ -28,7 +28,7 @@
 <style lang="less" scoped>
 .quick-container {
   .quick-card {
-    margin: 0px 20px 20px 20px;
+    // margin: 0px 20px 20px 20px;
     .github-star {
       float: right;
       color: #108ee9;

@@ -50,7 +50,7 @@
     }
     .topbar-info {
       float: right;
-      width: 100px;
+      width: 150px;
       line-height: 50px;
       padding: 0 10px;
       height: 50px;
@@ -88,16 +88,16 @@
       <a class="topbar-home" target="_blank" href="javascript:void(0);"></a>
       <a href="javascript:void(0);" target="_self" class="topbar-home-link">
         <span>ERP系统</span>
-      </a>
+      </a> 
     </el-col>
     <el-col :xs="12" :sm="12" :md="12" :lg="12">
       <el-dropdown trigger="click" class="topbar-info" @command="handleCommand">
         <a href="javascript:void(0)" class="user-name">
-          {{userName}}<i class="el-icon-caret-bottom el-icon--right"></i>
+          {{roleName}}--{{userName}}<i class="el-icon-caret-bottom el-icon--right"></i>
         </a>
         <el-dropdown-menu slot="dropdown">
-          <!-- <el-dropdown-item command="userCenter">个人中心</el-dropdown-item> -->
-          <!-- <el-dropdown-item>重置密码</el-dropdown-item> -->
+          <el-dropdown-item command="goodsmangement">商品管理</el-dropdown-item> 
+          <el-dropdown-item v-if="showUserManagement" command="user">用户管理</el-dropdown-item>
           <el-dropdown-item command="signOut">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -126,10 +126,16 @@ export default {
     const that = this;
     let cookies = that.$sto.get(that.$conf.constant.cookie);
     that.userName =  cookies.userName;
+      const base64 = require("base-64");
+      const utf8 = require("utf8");
+      that.roleName = utf8.decode(base64.decode(cookies.ticket));
+      that.showUserManagement = that.$sto.get(that.$conf.constant.cookie).userName=='lvxiao'; 
   },
   data() {
     return {
-      userName: ""
+      userName: "",
+      roleName: "",
+      showUserManagement:false
     };
   },
   methods: {
@@ -137,7 +143,7 @@ export default {
       // 点击菜单项触发的事件回调
       const that = this;
       if (command == "signOut") {
-        // 模拟退出登录
+        // 退出登录
         let $sto = that.$sto;
         let $conf = that.$conf;
         let cookies = $sto.get($conf.constant.cookie);
@@ -146,8 +152,10 @@ export default {
         }
         $sto.set($conf.constant.cookie, cookies);
         that.$router.push({ path: $conf.route.login });
-      }else if(command == 'userCenter'){
-        that.$router.push({path: '/userCenter'});
+      }else if(command == 'goodsmangement'){
+        that.$router.push({path: '/index'});
+      }else if(command == 'user'){
+        that.$router.push({path: '/user'});
       }
     }
   }

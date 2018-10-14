@@ -94,7 +94,7 @@
 .upload {
   border: 1px solid #ccc;
   background-color: #fff;
-  width: 650px;
+  width: 1000px;
   box-shadow: 0px 1px 0px #ccc;
   border-radius: 4px;
 }
@@ -115,14 +115,14 @@
                             <div class="upload_warp_left" @click="fileClick">
                             <img src="../images/upload.png">
                             </div>
-                            <div class="upload_warp_right" @drop="drop($event)" @dragenter="dragenter($event)" @dragover="dragover($event)">
+                            <div class="upload_warp_right" :disabled="disabled"  @drop="drop($event)" @dragenter="dragenter($event)" @dragover="dragover($event)">
                             或者将图片拖到此处
                             </div>
                         </div>
                         <div class="upload_warp_text">
                             选中{{imgList.length}}张图片，共{{bytesToSize(this.size)}}
                         </div>
-                        <input @change="fileChange($event)" type="file" id="upload_file" multiple style="display: none"/>
+                        <input :disabled="disabled" @change="fileChange($event)" type="file" id="upload_file" multiple style="display: none"/>
                         <div class="upload_warp_img" v-show="imgList.length!=0">
                             <div class="upload_warp_img_div" v-for="(item,index) of imgList">
                             <div class="upload_warp_img_div_top">
@@ -142,7 +142,7 @@
 import Config from "../config/index";
 export default {
   name: "ImgUpload",
-  props:["picids"],
+  props:["picids","disabled"],
   data() {
     return {
       imgList: [],

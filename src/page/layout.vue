@@ -4,14 +4,14 @@
     width: 100%;
     left: 0px;
     top: 0px;
-    bottom: 0px;
-    background-color: #eff2f7;
+    //bottom: 0px;
+    //background-color: #eff2f7;
     z-index: 100;
-    overflow-x: hidden;
-    overflow-y: auto;
+    //overflow-x: hidden;
+    //overflow-y: auto;
     .console-main {
       position: relative;
-      padding: 50px 0px 0px 180px;
+      padding: 10px 0px 0px 10px;
       width: auto;
       height: auto;
       &.console-main-full {
@@ -28,7 +28,7 @@
 <template>
     <div class="console-body">
         <console-topbar></console-topbar>
-        <console-sidebar></console-sidebar>
+        <!-- <console-sidebar></console-sidebar> -->
         <console-navbar v-show="hasNavbar"></console-navbar>
         <div class="console-main" :class="{'console-main-full': hasNavbar}">
           <console-bcrumd class="console-bcrumd"></console-bcrumd>

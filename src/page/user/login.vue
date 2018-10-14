@@ -26,8 +26,8 @@
 
 <script>
 import { Form, FormItem, Input, Button } from 'element-ui';
-import THREE from '../../libs/three/three';
-import UserApi from '../../api/user';
+import THREE from '../../libs/three/three'; 
+import fetch from '../../api/fetch/index';
 export default {
   components: {
     ElForm: Form,
@@ -82,7 +82,7 @@ export default {
         username: formLogin.username,
         password: formLogin.password
       }
-      const res = await UserApi.goLogin(params);
+      const res = await  fetch('POST', '/user/login', params);
       console.log(res);
       if (res.code == 0&&'failed'!=res.result) { 
          let $sto = that.$sto;

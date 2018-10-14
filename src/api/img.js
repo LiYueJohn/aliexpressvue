@@ -6,7 +6,7 @@ import fetch from './fetch/index';
  */
 class ImgApi {
   
-  getImgById = (params) => fetch('POST', '/img/query/imgId', params); 
+  getImgById(){return(params) =>fetch('POST', '/img/query/imgId', params); }
 
 }
 

@@ -17,7 +17,7 @@ import Config from './config/index';
 import Sto from 'store';
 
 import axios from 'axios';
-
+Vue.prototype.$ajax = axios
 Vue.use(VueRouter);
 
 import { Message, loading } from 'element-ui';

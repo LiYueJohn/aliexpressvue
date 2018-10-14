@@ -16,6 +16,8 @@ const Lost = r => require.ensure([], () => r(require('../page/base/thrmenu/lost'
 
 // 用户中心 -- 用户管理
 const User = r => require.ensure([], () => r(require('../page/user/user')), 'user');
+ 
+const  GoodsEdit = r => require.ensure([], () => r(require('../page/index/goodsedit')), 'goodsedit');
 
 // 基础服务 -- 三级菜单
 const thrmenuNavbar = [{
@@ -89,6 +91,13 @@ export default [{
     component: User,
     meta: {
       bcrumd: ['用户中心', '用户管理']
+    }
+  }, { 
+    path: '/goodsedit',
+    name: 'GoodsEdit',
+    component: GoodsEdit,
+    meta: {
+      bcrumd: ['商品管理', '商品新增/编辑']
     }
   }]
 }, {

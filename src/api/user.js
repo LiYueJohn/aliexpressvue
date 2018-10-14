@@ -11,13 +11,11 @@ class UserApi {
    * @param {password} 密码
    * @return {登录信息}
    */
-  goLogin = (params) => fetch('POST', '/user/login', params);
-   
-  getUserList = (params) => fetch('GET', '/user/query/list', params);
-  delUser = (params) => fetch('POST', '/user/del', params);
-  addUser = (params) => fetch('POST', '/user/add', params);
+  goLogin(){return (params) => fetch('POST', '/user/login', params);} 
+  getUserList (){return (params) => fetch('GET', '/user/query/list', params);}
+  delUser (){return (params) => fetch('POST', '/user/del', params);}
+  addUser (){return (params) => fetch('POST', '/user/add', params);}
 
 }
-
 // 实例化再导出
 export default new UserApi();

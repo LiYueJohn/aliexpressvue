@@ -6,15 +6,15 @@ import fetch from './fetch/index';
  */
 class TagApi {
   
-  getTagList = (params) => fetch('POST', '/tag/query/list', params);
+  getTagList(){return(params)=>fetch('POST', '/tag/query/list', params);}
   
-  addTag = (params) => fetch('POST', '/tag/add', params);
+  addTag(){return(params)=>fetch('POST', '/tag/add', params);}
   
-  getTag = (params) => fetch('POST', '/tag/query/id', params);
+  getTag(){return(params)=>fetch('POST', '/tag/query/id', params);}
   
-  editTag = (params) => fetch('POST', '/tag/edit', params);
+  editTag(){return(params)=>fetch('POST', '/tag/edit', params);}
   
-  delTag = (params) => fetch('POST', '/tag/del', params);
+  delTag(){return(params)=>fetch('POST', '/tag/del', params);}
 
 }
 

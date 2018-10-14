@@ -25,8 +25,7 @@
             label="商品分类"
             align="center"
             sortable
-            >
-            
+            > 
             </el-table-column>  
         </el-table> 
         
@@ -51,6 +50,8 @@
 <script>
 import bus from "../../assets/eventbus";
 import TagApi from "../../api/tag";
+
+import fetch from '../../api/fetch/index';
 export default {
   name: "goodsclassification",
   data() {
@@ -150,7 +151,7 @@ export default {
     async delTag() {
       const that = this;
       const params = { id: that.multipleSelection.join(",") };
-      const res = await TagApi.delTag(params);
+      const res = await fetch('POST', '/tag/del', params);
       if (res.code == 0) {
         if (res.result) {
           that.$message.success("删除成功");
@@ -180,7 +181,7 @@ export default {
     async addTag() { 
       const that = this;
       const params = { name: that.form.name };
-      const res = await TagApi.addTag(params); 
+      const res = await fetch('POST', '/tag/add', params);
       if (res.code == 0) {
         if (res.result) {
           that.$message.success("添加成功");
@@ -196,7 +197,7 @@ export default {
       //
       const that = this;
       const params = that.form;
-      const res = await TagApi.editTag(params); 
+      const res = await fetch('POST', '/tag/edit', params);
       if (res.code == 0) {
         if (res.result) {
           that.$message.success("编辑成功");
@@ -212,7 +213,7 @@ export default {
       //
       const that = this;
       const params = {};
-      const res = await TagApi.getTagList(params);
+      const res = await fetch('POST', '/tag/query/list', params);
       console.log(res);
       if (res.code == 0) {
         that.tableData = res.result;

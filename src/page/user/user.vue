@@ -99,6 +99,7 @@
 <script>
 import { Table, TableColumn, Icon, Popover, Tag, Button } from "element-ui";
 import UserApi from "../../api/user";
+import fetch from '../../api/fetch/index';
 export default {
   components: {
     ElTable: Table,
@@ -133,7 +134,9 @@ export default {
       roledata: [
         { id: 1, name: "主管" },
         { id: 2, name: "产品编辑" },
-        { id: 3, name: "产品开发" }
+        { id: 3, name: "产品开发" },
+        { id: 4, name: "销售员" },
+        { id: 5, name: "仓库管理员" }
       ],
       tableData: [],
       showUserManagement:false
@@ -185,7 +188,7 @@ export default {
     async getUserList() {
       const that = this;
       const params = {};
-      const res = await UserApi.getUserList(params);
+      const res = await fetch('GET', '/user/query/list', params);
       if (res.code == 0) {
         that.tableData = res.result;
       } else {
@@ -195,7 +198,7 @@ export default {
     async addUser() {
       const that = this;
       const params = that.form;
-      const res = await UserApi.addUser(params);
+      const res = await fetch('POST', '/user/add', params);
       if (res.code == 0) {
         if (res.result == "-1") {
           that.$message.error("用户已存在！");
@@ -213,7 +216,7 @@ export default {
     async delUser(id) {
       const that = this;
       const params = { id: id };
-      const res = await UserApi.delUser(params);
+      const res = await fetch('POST', '/user/del', params);
       if (res.code == 0) {
         if (res.result) {
           that.$message.success("删除成功");
