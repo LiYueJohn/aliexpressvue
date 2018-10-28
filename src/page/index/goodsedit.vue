@@ -108,6 +108,46 @@
                           </el-form-item> 
                           </el-col>
                       </el-row> 
+                      <el-row :gutter="20">
+                        <el-col :span="24" >
+                            <el-form-item label="多商品操作"   :label-width="formLabelWidth"> 
+                               <el-button type="primary" @click="addSonProduct">新增子商品</el-button>
+                           </el-form-item> 
+                         <el-form-item
+                            v-for="(val, index) in multiproduct"
+                            :label="'子商品' + (index+1)"
+                            :key="'s'+index"
+                            :label-width="formLabelWidth"
+                          >
+                          <el-form >
+                             <el-row :gutter="20">
+                              <el-col :span="7" >
+                                <el-form-item label="名称" label-width="40px"  >  
+                                  <el-input v-model="val.name" placeholder="名称"></el-input>
+                                </el-form-item>  
+                              </el-col>  
+                              <el-col :span="7" > 
+                                <el-form-item label="价格"  label-width="40px"  >  
+                                  <el-input v-model="val.price"  placeholder="价格（CNY）" ></el-input>
+                                </el-form-item> 
+                              </el-col>
+                              <el-col :span="7" > 
+                                <el-form-item label="重量"  label-width="40px"  >  
+                                  <el-input v-model="val.weight"  placeholder="重量（KG）" ></el-input>
+                                </el-form-item> 
+                              </el-col> 
+                                <el-col :span="2" > 
+                                <el-form-item   >  
+                                    <el-button type="primary" @click.prevent="removeSonProduct(val)">删除</el-button> 
+                                </el-form-item> 
+                              </el-col>
+                              </el-row>
+                          </el-form>
+                            
+                           
+                          </el-form-item>
+                        </el-col>
+                      </el-row>
                        <el-row :gutter="20" >
                           <el-col :span="12" v-if="showSupplier" > 
                           <el-form-item label="在售店铺" prop="shop" :label-width="formLabelWidth">
@@ -208,6 +248,7 @@ export default {
       showDetailsOperate: false,
       showSupplier: false,
       formLabelWidth: "100px",
+      multiproduct:[],
       form: {
         id: "",
         name: "",
@@ -223,7 +264,8 @@ export default {
         declareen: "",
         declarezh: "",
         idpics: "",
-        idpic: "",
+        idpic: "", 
+        multiproduct: [],
         status: "1"
       },
       editPicId: "",
@@ -246,6 +288,14 @@ export default {
         {
           value: "4",
           label: "待编辑"
+        },
+        {
+          value: "5",
+          label: "新品"
+        },
+        {
+          value: "6",
+          label: "爆款"
         }
       ],
       tagsData: []
@@ -302,6 +352,7 @@ export default {
       if (res.code == 0) {
         that.imageUrl = "";
         that.form = res.result;
+        that.multiproduct = JSON.parse(that.form.multiproduct);
         that.editPicId = res.result.idpic;
         that.form.status = res.result.status + "";
         let tagsData = res.result.tagids.split(",");
@@ -372,6 +423,7 @@ export default {
             oldPicids.push(resData.result);
           }
           this.form.idpics = oldPicids.join(",");
+          this.form.multiproduct = JSON.stringify(this.multiproduct);
           this.addGoods();
         },
         err => {
@@ -428,7 +480,16 @@ export default {
       // link.setAttribute("download", "excel.zip");
       document.body.appendChild(link);
       link.click();
-    }
+    },  removeSonProduct(item) {
+        var index = this.multiproduct.indexOf(item)
+        if (index !== -1) {
+          this.multiproduct.splice(index, 1)
+        }
+      }, addSonProduct() {
+        this.multiproduct.push({
+          name:"",price:"",weight:""
+        });
+      }
   }
 };
 </script>
